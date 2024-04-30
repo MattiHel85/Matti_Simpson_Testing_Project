@@ -1,0 +1,67 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing CRUD operations (Create, Read, Update, Delete) on projects.
+
+Pre Condition	Open browser, login 
+Post Condition	logout, close browser
+Tags	Project CRUD tests
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+ProjectCreationUrl = https://gitlab.com/projects/new
+BlankProjectUrl = https://gitlab.com/projects/new#blank_project
+TemplateProjectUrl = https://gitlab.com/projects/new#create_from_template
+
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Verify that a user can create a blank project.
+		- Navigate to the project creation page using ProjectCreationUrl from the above variables - READ
+		- Select blank project creation to navigate to BlankProjectUrl from the above variables - READ
+		- Input necessary details (if any)
+		- Create the project without adding any additional information - CREATE
+		- Verify that the project is successfully created - READ
+
+	Verify that a user can create a project from a template.
+		- Navigate to the project creation page using ProjectCreationUrl from the above variables - READ
+		- Select template project creation page using TemplateProjectUrl from the above variables - READ
+		- Select a template for the new project
+		- Input necessary details (if any)
+		- Create the project using the selected template - CREATE
+		- Verify that the project is successfully created - READ
+
+	Verify that a user can update the name of a template project.
+		- Navigate to the project page
+		- Select the template project to be edited - UPDATE
+		- Update the project name
+		- Save the changes
+		- Verify that the project name is successfully updated - READ
+
+	Verify that a user can delete a template project.
+		- Navigate to the project page
+		- Select the template project to be deleted
+		- Delete the project - DELETE
+		- Verify that the project is successfully deleted
+
+	Verify that a success message is displayed after project creation.
+		- Perform any of the above positive test cases for project creation
+		- Verify that the message "Project 'ProjectName' was successfully created" is displayed - READ
+
+# Negative Test examples are below write test process steps for each below test case
+
+	Verify that a user cannot create a project with an existing name.
+		- Navigate to the project creation page using ProjectCreationUrl from the above variables - READ
+		- Input a project name that already exists
+		- Attempt to create the project - CREATE
+		- Verify that an appropriate error message is displayed indicating that the project name is already taken - READ

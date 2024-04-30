@@ -1,0 +1,75 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing user registration with verification, valid and invalid credentials.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open Browser 
+Post Condition	Close All Browsers
+Tags	Signup
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+SignupUrl = https://gitlab.com/users/sign_up
+UserName = MRCS85
+Email= matti.simpson@student.laurea.fi
+Password= tempPassword123
+Invalid_Email= mattisimpson
+Valid_Email= matti.simpson@hotmail.fi
+Invalid_Password= 1234567
+Empty= 
+
+
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Tests
+	Verify that a user can register with valid credentials.
+		- Navigate to the registration page
+		- Input Email, UserName and Password (plus what else they require) from the above variables
+		- Submit the registration form
+		- Verify registration by logging in
+ 
+
+# Negative Tests
+
+	Verify that a user cannot register with an existing username.
+		- Navigate to the registration page
+		- Input an already registered username (UserName from the above variables should already be registered)
+		- Input a valid password (This can also be Password from the above variables)
+		- Submit the registration form
+		- Verify that an appropriate error message is displayed indicating that the username is already taken
+
+	Verify that a user cannot register with an empty password field.
+		- Navigate to the registration page
+		- Input a unique username
+		- Leave the password field empty (or use the Empty variable)
+		- Submit the registration form
+		- Verify that an appropriate error message is displayed indicating that the password field is required
+
+	Verify that a user cannot register with an invalid email address.
+		- Navigate to the registration page
+		- Input Invalid_Username from the above variables
+		- Input a valid password
+		- Submit the registration form
+		- Verify that an appropriate error message is displayed indicating that the email address is invalid
+
+	Verify that a user cannot register without completing the recaptcha.
+		- Navigate to the registration page
+		- Input Valid_Username from the above variables
+		- Input a valid password
+		- Complete all required fields
+		- Do not complete the recaptcha
+		- Submit the registration form
+		- Verify that an appropriate error message is displayed indicating that the recaptcha is required

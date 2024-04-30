@@ -1,0 +1,46 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+Pre Condition	Project must be created by the user before testing issues.
+Post Condition	Logout, close browser
+Tags	Issue, CRUD
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+IssueCreationUrl = https://gitlab.com/embla1/test-project/-/issues/new
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Tests
+	Verify that a user can create an issue.
+		- Navigate to the issue creation page using IssueCreationUrl
+		- Input necessary details for the new issue
+		- Create the issue
+		- Verify that the issue is successfully created
+
+	Verify that a user can update the name of an issue.
+		- Navigate to the issue page
+		- Select the issue to be edited
+		- Update the issue name
+		- Save the changes
+		- Verify that the issue name is successfully updated
+
+	Verify that a user can create a second issue with the previously updated name.
+		- Navigate to the issue creation page using IssueCreationUrl
+		- Input the previously updated name for the new issue
+		- Create the issue
+		- Verify that the second issue with the updated name is successfully created
+
+	Verify that a user can delete the first issue.
+		- Navigate to the issue page
+		- Select the first issue to be deleted
+		- Delete the issue
+		- Verify that the first issue is successfully deleted
